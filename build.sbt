@@ -1,4 +1,4 @@
-val playVersion = "2.5.10"
+val playVersion = "2.6.0-RC1"
 val commonDependenciesInTestScope = Seq(
   "org.scalatest" %% "scalatest" % "3.0.1" % "test",
   "ch.qos.logback" % "logback-classic" % "1.1.8" % "test"
@@ -15,9 +15,10 @@ lazy val scalaOAuth2ProviderSettings =
     Seq(
       organization := "com.nulab-inc",
       scalaVersion := "2.11.8",
-      crossScalaVersions := Seq("2.11.8"),
+      crossScalaVersions := Seq("2.11.8", "2.12.2"),
       scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature"),
       scalacOptions ++= unusedWarnings,
+      resolvers += "Akka Snapshot Repository" at "http://repo.akka.io/snapshots/",
       publishTo := {
         val v = version.value
         val nexus = "https://oss.sonatype.org/"
@@ -58,7 +59,7 @@ lazy val root = Project(
     description := "Support scala-oauth2-core library on Playframework Scala",
     version := "1.2.1-SNAPSHOT",
     libraryDependencies ++= Seq(
-      "com.nulab-inc" % "scala-oauth2-core_2.11" % "1.2.0",
+      "com.nulab-inc" %% "scala-oauth2-core" % "1.3.0",
       "com.typesafe.play" %% "play" % playVersion % "provided",
       "com.typesafe.play" %% "play-test" % playVersion % "test"
     ) ++ commonDependenciesInTestScope

@@ -98,9 +98,8 @@ You can write more easily authorize action by using Action composition.
 Play Framework's documentation is [here](https://www.playframework.com/documentation/2.5.x/ScalaActionsComposition).
 
 ```scala
-object MyController extends Controller {
-
-  import scalaoauth2.provider.OAuth2ProviderActionBuilders._
+class MyController @Inject() (val controllerComponents: ControllerComponents)
+  extends BaseController with OAuth2ProviderActionBuilders {
 
   def list = AuthorizedAction(new MyDataHandler()) { request =>
     val user = request.authInfo.user // User is defined on your system
